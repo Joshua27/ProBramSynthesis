@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'de.hhu.stups'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        name "sonatype snapshots"
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+    maven {
+        name "sonatype release"
+        url "https://oss.sonatype.org/content/repositories/releases"
+    }
+}
+
+dependencies {
+    compile 'de.hhu.stups:de.prob2.kernel:4.0.0-SNAPSHOT'
+}
