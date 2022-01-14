@@ -5,7 +5,6 @@ import com.google.inject.Injector;
 import com.google.inject.Stage;
 import de.prob.MainModule;
 import de.prob.scripting.Api;
-import de.prob.scripting.ModelTranslationError;
 import de.prob.statespace.StateSpace;
 import de.prob.synthesis.*;
 
@@ -21,7 +20,6 @@ class BSynthesisLiftExample {
 
   private StateSpace stateSpace;
 
-
   BSynthesisLiftExample() {
     Injector injector =
         Guice.createInjector(Stage.PRODUCTION, new BSynthesisModule(), new MainModule());
@@ -32,7 +30,7 @@ class BSynthesisLiftExample {
     }
     try {
       stateSpace = api.b_load(machineUrl.getPath());
-    } catch (IOException | ModelTranslationError e) {
+    } catch (IOException e) {
       logger.log(Level.SEVERE, "Machine could not be loaded. See ProB log file.");
     }
   }
@@ -46,14 +44,14 @@ class BSynthesisLiftExample {
     synthesizer.setSynthesisMode(SynthesisMode.FIRST_SOLUTION);
     HashSet<IOExample> positiveIOExamples = new HashSet<>();
     positiveIOExamples.add(new IOExample(
-        new Example().addf(new VariableExample("floor", "0")),
-        new Example().addf(new VariableExample("floor", "1"))));
+        new Example().addf(new VariableExample("level", "0")),
+        new Example().addf(new VariableExample("level", "1"))));
     positiveIOExamples.add(new IOExample(
-        new Example().addf(new VariableExample("floor", "1")),
-        new Example().addf(new VariableExample("floor", "2"))));
+        new Example().addf(new VariableExample("level", "1")),
+        new Example().addf(new VariableExample("level", "2"))));
     positiveIOExamples.add(new IOExample(
-        new Example().addf(new VariableExample("floor", "2")),
-        new Example().addf(new VariableExample("floor", "3"))));
+        new Example().addf(new VariableExample("level", "2")),
+        new Example().addf(new VariableExample("level", "3"))));
     try {
       BSynthesisResult solution =
           synthesizer.synthesizeOperation(positiveIOExamples, new HashSet<>());
@@ -71,14 +69,14 @@ class BSynthesisLiftExample {
     BSynthesizer synthesizer = new BSynthesizer(stateSpace);
     synthesizer.setSynthesisMode(SynthesisMode.FIRST_SOLUTION);
     HashSet<Example> positiveExamples = new HashSet<>();
-    positiveExamples.add(new Example().addf(new VariableExample("floor", "1")));
-    positiveExamples.add(new Example().addf(new VariableExample("floor", "2")));
-    positiveExamples.add(new Example().addf(new VariableExample("floor", "3")));
+    positiveExamples.add(new Example().addf(new VariableExample("level", "1")));
+    positiveExamples.add(new Example().addf(new VariableExample("level", "2")));
+    positiveExamples.add(new Example().addf(new VariableExample("level", "3")));
 
     HashSet<Example> negativeExamples = new HashSet<>();
-    negativeExamples.add(new Example().addf(new VariableExample("floor", "0")));
-    negativeExamples.add(new Example().addf(new VariableExample("floor", "-1")));
-    negativeExamples.add(new Example().addf(new VariableExample("floor", "-2")));
+    negativeExamples.add(new Example().addf(new VariableExample("level", "0")));
+    negativeExamples.add(new Example().addf(new VariableExample("level", "-1")));
+    negativeExamples.add(new Example().addf(new VariableExample("level", "-2")));
     try {
       BSynthesisResult solution =
           synthesizer.synthesizePredicate(positiveExamples, negativeExamples);
