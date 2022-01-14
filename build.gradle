@@ -20,5 +20,7 @@ repositories {
 }
 
 dependencies {
+    // Show ProB logs:
+    // implementation group: "ch.qos.logback", name: "logback-classic", version: "1.2.10"
     compile 'de.hhu.stups:de.prob2.kernel:4.0.0-SNAPSHOT'
 }
