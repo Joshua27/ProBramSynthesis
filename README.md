@@ -49,18 +49,18 @@ We provide three classes to create examples:
 As mentioned above one can either synthesize a B predicate or a complete machine operation. To do so, a BSynthesizer object provides two methods **synthesizePredicate()** and **synthesizeOperation()**.
 
 Synthesizing a B predicate expects a set of positive examples and a set of negative examples (Example.java).
-For instance, assume we have loaded a machine that has an integer variable called "floor" and want to synthesize the predicate "floor > 0".
+For instance, assume we have loaded a machine that has an integer variable called "level" and want to synthesize the predicate "level > 0".
 First, we create the set of positive and negative examples:
 ```Java
 HashSet<Example> positiveExamples = new HashSet<>();
-positiveExamples.add(new Example().addf(new VariableExample("floor", "1")));
-positiveExamples.add(new Example().addf(new VariableExample("floor", "2")));
-positiveExamples.add(new Example().addf(new VariableExample("floor", "3")));
+positiveExamples.add(new Example().addf(new VariableExample("level", "1")));
+positiveExamples.add(new Example().addf(new VariableExample("level", "2")));
+positiveExamples.add(new Example().addf(new VariableExample("level", "3")));
 
 HashSet<Example> negativeExamples = new HashSet<>();
-negativeExamples.add(new Example().addf(new VariableExample("floor", "0")));
-negativeExamples.add(new Example().addf(new VariableExample("floor", "-1")));
-negativeExamples.add(new Example().addf(new VariableExample("floor", "-2")));
+negativeExamples.add(new Example().addf(new VariableExample("level", "0")));
+negativeExamples.add(new Example().addf(new VariableExample("level", "-1")));
+negativeExamples.add(new Example().addf(new VariableExample("level", "-2")));
 ```
 Note that the method addf() is just a wrapper for a Java set's add() method enabling a functional style.
 Afterwards, we are able to run synthesis using synthesizePredicate():
@@ -78,18 +78,18 @@ try {
 A **BSynthesisResult** is either a program or a distinguishing example depending on the selected synthesis mode.
 If synthesis fails, an exception is thrown providing an appropriate error message.
 
-Now assume that we want to synthesize a B machine operation that increases the variable "floor" by one. Again, we first create the set of positive and negative examples which are now examples for input and output:
+Now assume that we want to synthesize a B machine operation that increases the variable "level" by one. Again, we first create the set of positive and negative examples which are now examples for input and output:
 ```Java
 HashSet<IOExample> positiveIOExamples = new HashSet<>();
 positiveIOExamples.add(new IOExample(
-    new Example().addf(new VariableExample("floor", "0")),
-    new Example().addf(new VariableExample("floor", "1"))));
+    new Example().addf(new VariableExample("level", "0")),
+    new Example().addf(new VariableExample("level", "1"))));
 positiveIOExamples.add(new IOExample(
-    new Example().addf(new VariableExample("floor", "1")),
-    new Example().addf(new VariableExample("floor", "2"))));
+    new Example().addf(new VariableExample("level", "1")),
+    new Example().addf(new VariableExample("level", "2"))));
 positiveIOExamples.add(new IOExample(
-    new Example().addf(new VariableExample("floor", "2")),
-    new Example().addf(new VariableExample("floor", "3"))));
+    new Example().addf(new VariableExample("level", "2")),
+    new Example().addf(new VariableExample("level", "3"))));
 ```
 Afterwards, we are able to run synthesis:
 ```Java
