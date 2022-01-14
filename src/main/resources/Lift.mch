@@ -1,18 +1,18 @@
 MACHINE lift
 
-VARIABLES floor
+VARIABLES level
 
-CONSTANTS min_floor, max_floor
+CONSTANTS min_level, max_level
 
-PROPERTIES min_floor = -2 & max_floor = 5
+PROPERTIES min_level = -2 & max_level = 5
 
-INITIALISATION floor := 0
+INITIALISATION level := 0
 
-INVARIANT floor : min_floor..max_floor
+INVARIANT level : min_level..max_level
 
 OPERATIONS
-    floor_down =
-        PRE floor > min_floor THEN
-            floor := floor - 1
+    level_down =
+        PRE level > min_level THEN
+            level := level - 1
         END
 END
